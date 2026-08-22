@@ -4,7 +4,10 @@ data/
 
 #nextflow 
 .nextflow/
+.nf-test/
 work/
 results/
 .nextflow.log*
 *.log
+
+**/*.snap
