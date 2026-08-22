@@ -1,2 +1,0 @@
-task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
-1	ef/8a9f78	151160	ALIGN_READS (SRR40299199)	COMPLETED	0	2026-08-22 17:11:38.075	1m 23s	1m 23s	101.0%	1011.1 MB	1.5 GB	1.7 GB	879.6 MB
