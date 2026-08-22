@@ -1,0 +1,28 @@
+nextflow_process {
+
+    name "Test Process VARIANT_CALLING"
+    script "modules/variants.nf"
+    process "VARIANT_CALLING"
+
+    test("Should run without failures") {
+
+        when {
+            process {
+                """
+                input[0] = tuple("SRR40299199",
+                    file("$projectDir/results/bam/SRR40299199.sorted.bam", checkIfExists: true),
+                    file("$projectDir/results/bam/SRR40299199.sorted.bam.bai", checkIfExists: true)
+                )
+                input[1] = file("$projectDir/data/ref/GCF_900205735.1_N16961_v2_genomic.fna", checkIfExists: true)
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+}
