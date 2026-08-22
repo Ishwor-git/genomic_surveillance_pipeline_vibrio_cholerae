@@ -17,8 +17,8 @@ workflow {
     // ALIGN_READS(reads_ch, ref_ch)
     TRIM_READS(reads_ch)
 
-    ALIGN_READS(TRIM_READS.trimmed, ref_ch)
+    ALIGN_READS(TRIM_READS.out.trimmed, ref_ch)
 
-    VARIANT_CALLING(ALIGN_READS.bam_bei, ref_ch)
+    VARIANT_CALLING(ALIGN_READS.out.bam_bei, ref_ch)
 
 }

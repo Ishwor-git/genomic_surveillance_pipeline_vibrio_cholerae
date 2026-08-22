@@ -6,7 +6,7 @@ process TRIM_READS {
         tuple val(sample_id), path(reads)
 
         output:
-        tuple val(sample_id), path("${sample_id}_1.trim.fastq"), path("${sample_id}_2.trim.fastq"), emit: trimmed
+        tuple val(sample_id), path(["${sample_id}_1.trim.fastq", "${sample_id}_2.trim.fastq"]), emit: trimmed
         path "${sample_id}.fastp.html", emit: html
         path "${sample_id}.fastp.json", emit: json
 
