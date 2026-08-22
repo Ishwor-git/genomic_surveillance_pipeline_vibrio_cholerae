@@ -8,6 +8,7 @@
     include { VARIANT_CALLING } from './modules/variants.nf'
     include { SCREEN_AMR } from './modules/amr.nf'
     include { TRIM_READS } from './modules/trim.nf'
+    include {GENERATE_CONSENSUS} from './modules/consensus.nf'
 
 workflow {
 
@@ -20,5 +21,9 @@ workflow {
     ALIGN_READS(TRIM_READS.out.trimmed, ref_ch)
 
     VARIANT_CALLING(ALIGN_READS.out.bam_bei, ref_ch)
+
+    GENERATE_CONSENSUS(VARIANT_CALLING.out.vcf_bei, ref_ch)
+
+    SCREEN_AMR(GENERATE_CONSENSUS.out.consensus_fasta) 
 
 }
