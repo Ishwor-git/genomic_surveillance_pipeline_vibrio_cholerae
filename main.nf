@@ -5,6 +5,7 @@
 
 //imports
     include { ALIGN_READS } from './modules/align.nf'
+    include { VARIANT_CALLING } from './modules/variants.nf'
 
 workflow {
 
@@ -12,4 +13,7 @@ workflow {
     reads_ch = Channel.fromFilePairs(params.reads, checkIfExists: true)
 
     ALIGN_READS(reads_ch, ref_ch)
+
+    VARIANT_CALLING(ALIGN_READS.bam_bei, ref_ch)
+
 }
