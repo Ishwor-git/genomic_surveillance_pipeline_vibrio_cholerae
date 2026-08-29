@@ -1,0 +1,26 @@
+nextflow_process {
+
+    name "Test Process SCREEN_AMR"
+    script "modules/amr.nf"
+    process "SCREEN_AMR"
+
+    test("Should run without failures") {
+
+        when {
+            process {
+                """
+                input[0] = tuple("SRR40299199",
+                    file("\$projectDir/results/consensus/SRR40299199.consensus.fasta", checkIfExists: true)
+                )
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+}
