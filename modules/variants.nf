@@ -11,6 +11,9 @@ process VARIANT_CALLING {
 
     script:
     """
+    # index the reference for bcftools mpileup
+    samtools faidx $ref
+
     # 1. Generate genotype likelihoods and call variants into a binary BCF
     bcftools mpileup -f $ref $bam | \
         bcftools call -mv -Oz -o ${sample_id}.raw.vcf.gz

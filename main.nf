@@ -1,6 +1,6 @@
 // params 
     params.ref = "$projectDir/data/ref/GCF_900205735.1_N16961_v2_genomic.fna"
-    params.reads = "$projectDir/data/reads/SRR40299199_{1,2}.fastq"
+    params.reads = "$projectDir/data/reads/srr40299199/SRR40299199_{1,2}.fastq"
     params.outDir = "$projectDir/results/"
 
 //imports
