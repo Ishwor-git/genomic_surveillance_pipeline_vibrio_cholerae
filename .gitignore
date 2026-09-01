@@ -1,6 +1,7 @@
 #data
-data/
+data/*
 
+!data/runs.txt
 
 #nextflow 
 .nextflow/
@@ -11,3 +12,4 @@ results/
 *.log
 
 **/*.snap
+
