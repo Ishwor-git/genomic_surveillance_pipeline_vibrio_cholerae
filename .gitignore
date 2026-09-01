@@ -2,7 +2,7 @@
 data/*
 
 !data/runs.txt
-
+!data/download.sh
 #nextflow 
 .nextflow/
 .nf-test/
