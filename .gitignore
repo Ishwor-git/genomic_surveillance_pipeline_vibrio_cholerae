@@ -1,6 +1,6 @@
 #data
 data/*
-
+!data/metadata.tsv
 !data/runs.txt
 !data/download.sh
 #nextflow 
