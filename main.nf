@@ -1,24 +1,24 @@
 // params
-params.ref = "$projectDir/data/ref/GCF_900205735.1_N16961_v2_genomic.fna"
-params.metadata = "$projectDir/data/metadata.csv"
-params.reads = "$projectDir/data/reads/*/*_{1,2}.fastq"
-params.outDir = "$projectDir/results/"
+params.ref = "${projectDir}/data/ref/GCF_900205735.1_N16961_v2_genomic.fna"
+params.metadata = "${projectDir}/data/metadata.tsv"
+params.reads = "${projectDir}/data/reads/*/*_{1,2}.fastq"
+params.outDir = "${projectDir}/results/"
 
-params.amrfinder_db = "$projectDir/data/amrfinder_db"
+params.amrfinder_db = "${projectDir}/data/amrfinder_db"
 params.mlst_db = null
 
 // imports
 include { PREPARE_REFERENCE } from './modules/prepare_ref.nf'
-include { ALIGN_READS }       from './modules/align.nf'
-include { VARIANT_CALLING }   from './modules/variants.nf'
-include { SCREEN_AMR }        from './modules/amr.nf'
-include { TRIM_READS }        from './modules/trim.nf'
+include { ALIGN_READS } from './modules/align.nf'
+include { VARIANT_CALLING } from './modules/variants.nf'
+include { SCREEN_AMR } from './modules/amr.nf'
+include { TRIM_READS } from './modules/trim.nf'
 include { GENERATE_CONSENSUS } from './modules/consensus.nf'
 
 workflow {
-    metadata_ch = Channel.fromPath(params.metadata, checkIfExists: true)
-    reads_ch    = Channel.fromFilePairs(params.reads, checkIfExists: true)
-    ref_ch      = Channel.fromPath(params.ref, checkIfExists: true)
+    metadata_ch = Channel.fromPath(params.metadata, checkIfExists: true).splitCsv(header: true, sep: '\t')
+    reads_ch = Channel.fromFilePairs(params.reads, checkIfExists: true)
+    ref_ch = Channel.fromPath(params.ref, checkIfExists: true)
 
     PREPARE_REFERENCE(ref_ch)
 
