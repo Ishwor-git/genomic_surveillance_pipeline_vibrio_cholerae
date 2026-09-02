@@ -3,6 +3,7 @@ params.ref = "${projectDir}/data/ref/GCF_900205735.1_N16961_v2_genomic.fna"
 params.metadata = "${projectDir}/data/metadata.tsv"
 params.reads = "${projectDir}/data/reads/*/*_{1,2}.fastq"
 params.outDir = "${projectDir}/results/"
+params.markerDir = "${projectDir}/data/markers"
 
 params.amrfinder_db = "${projectDir}/data/amrfinder_db"
 params.mlst_db = null
@@ -15,6 +16,7 @@ include { SCREEN_AMR } from './modules/amr.nf'
 include { TRIM_READS } from './modules/trim.nf'
 include { GENERATE_CONSENSUS } from './modules/consensus.nf'
 include { FILTER_VARIANTS } from './modules/filter_variants.nf'
+include { TYPE_ISOLATE } from './modules/typing.nf'
 
 workflow {
     metadata_ch = Channel.fromPath(params.metadata, checkIfExists: true).splitCsv(header: true, sep: '\t')
@@ -35,4 +37,5 @@ workflow {
     GENERATE_CONSENSUS(FILTER_VARIANTS.out.filtered_vcf, indexed_ref)
 
     SCREEN_AMR(GENERATE_CONSENSUS.out.consensus_fasta)
+    TYPE_ISOLATE(GENERATE_CONSENSUS.out.consensus_fasta, file(params.markerDir))
 }
