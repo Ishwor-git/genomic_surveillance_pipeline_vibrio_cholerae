@@ -21,14 +21,15 @@ workflow {
     ref_ch = Channel.fromPath(params.ref, checkIfExists: true)
 
     PREPARE_REFERENCE(ref_ch)
+    indexed_ref = PREPARE_REFERENCE.out.indexed_ref.first()
 
     TRIM_READS(reads_ch)
 
-    ALIGN_READS(TRIM_READS.out.trimmed, PREPARE_REFERENCE.out.indexed_ref)
+    ALIGN_READS(TRIM_READS.out.trimmed, indexed_ref)
 
-    VARIANT_CALLING(ALIGN_READS.out.bam_bei, PREPARE_REFERENCE.out.indexed_ref)
+    VARIANT_CALLING(ALIGN_READS.out.bam_bei, indexed_ref)
 
-    GENERATE_CONSENSUS(VARIANT_CALLING.out.vcf_bei, PREPARE_REFERENCE.out.indexed_ref)
+    GENERATE_CONSENSUS(VARIANT_CALLING.out.vcf_bei, indexed_ref)
 
     SCREEN_AMR(GENERATE_CONSENSUS.out.consensus_fasta)
 }
