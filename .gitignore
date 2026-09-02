@@ -3,6 +3,7 @@ data/*
 !data/metadata.tsv
 !data/runs.txt
 !data/download.sh
+!data/getmarkers.sh
 #nextflow 
 .nextflow/
 .nf-test/
