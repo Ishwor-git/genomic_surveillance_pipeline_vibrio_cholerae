@@ -14,7 +14,7 @@ process FILTER_VARIANTS {
     bcftools norm -f ${ref} ${vcf} -Oz -o ${sample_id}.norm.vcf.gz
     bcftools index ${sample_id}.norm.vcf.gz
 
-    bcftools filter -e 'QUAL<30 || INFO/DP<10' ${sample_id}.norm.vcf.gz -Oz -o ${sample_id}.filtered.vcf.gz
+    bcftools filter -e 'QUAL<30 || INFO/DP<10 || INFO/AF<0.8' ${sample_id}.norm.vcf.gz -Oz -o ${sample_id}.filtered.vcf.gz
     bcftools index ${sample_id}.filtered.vcf.gz
     """
 }

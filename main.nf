@@ -14,7 +14,7 @@ include { VARIANT_CALLING } from './modules/variants.nf'
 include { SCREEN_AMR } from './modules/amr.nf'
 include { TRIM_READS } from './modules/trim.nf'
 include { GENERATE_CONSENSUS } from './modules/consensus.nf'
-include { FILTER_VARIANTS } from './modules/filter_varients.nf'
+include { FILTER_VARIANTS } from './modules/filter_variants.nf'
 
 workflow {
     metadata_ch = Channel.fromPath(params.metadata, checkIfExists: true).splitCsv(header: true, sep: '\t')
