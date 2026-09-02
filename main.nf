@@ -14,6 +14,7 @@ include { VARIANT_CALLING } from './modules/variants.nf'
 include { SCREEN_AMR } from './modules/amr.nf'
 include { TRIM_READS } from './modules/trim.nf'
 include { GENERATE_CONSENSUS } from './modules/consensus.nf'
+include { FILTER_VARIANTS } from './modules/filter_varients.nf'
 
 workflow {
     metadata_ch = Channel.fromPath(params.metadata, checkIfExists: true).splitCsv(header: true, sep: '\t')
@@ -29,7 +30,9 @@ workflow {
 
     VARIANT_CALLING(ALIGN_READS.out.bam_bei, indexed_ref)
 
-    GENERATE_CONSENSUS(VARIANT_CALLING.out.vcf_bei, indexed_ref)
+    FILTER_VARIANTS(VARIANT_CALLING.out.vcf_bei, indexed_ref)
+
+    GENERATE_CONSENSUS(FILTER_VARIANTS.out.filtered_vcf, indexed_ref)
 
     SCREEN_AMR(GENERATE_CONSENSUS.out.consensus_fasta)
 }
