@@ -1,5 +1,6 @@
 process ALIGN_READS {
     tag "${sample_id}"
+    container 'vibrio-mapping:1.0'
     publishDir "${params.outDir}/bam", mode: 'copy'
 
     input:

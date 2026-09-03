@@ -1,5 +1,6 @@
 process TYPE_ISOLATE {
     tag "${sample_id}"
+    container 'vibrio-typing:1.0'
     publishDir "${params.outDir}/typing", mode: 'copy'
 
     input:

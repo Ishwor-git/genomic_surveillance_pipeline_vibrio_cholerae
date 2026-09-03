@@ -1,5 +1,6 @@
 process TRIM_READS {
     tag "${sample_id} "
+    container 'vibrio-qc:1.0'
     publishDir "${params.outDir}/trimmed", mode: 'copy'
 
     input:
@@ -21,4 +22,3 @@ process TRIM_READS {
             --json ${sample_id}.fastp.json
         """
 }
-

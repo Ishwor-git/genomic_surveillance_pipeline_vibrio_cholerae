@@ -1,5 +1,6 @@
 process VARIANT_CALLING {
     tag "${sample_id}"
+    container 'vibrio-variants:1.0'
     publishDir "${params.outDir}/vcf", mode: 'copy'
 
     input:

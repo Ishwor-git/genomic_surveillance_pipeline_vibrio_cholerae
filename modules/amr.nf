@@ -1,5 +1,6 @@
 process SCREEN_AMR {
     tag "${sample_id}"
+    container 'vibrio-amr:1.0'
     publishDir "${params.outDir}/amr", mode: 'copy'
 
     input:
@@ -13,4 +14,3 @@ process SCREEN_AMR {
     amrfinder -n ${consensus} --plus -o ${sample_id}.amr.tsv
     """
 }
-

@@ -1,5 +1,6 @@
 process PREPARE_REFERENCE {
     tag "reference"
+    container 'vibrio-mapping:1.0'
     publishDir "${params.outDir}/reference", mode: 'copy'
 
     input:
