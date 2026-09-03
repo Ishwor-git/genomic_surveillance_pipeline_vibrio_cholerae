@@ -4,7 +4,7 @@ process ALIGN_READS {
 
     input:
     tuple val(sample_id), path(reads)
-    tuple path(ref), path(ref_index_files), path(ref_dict)
+    tuple path(ref), path(ref_index_files)
 
     output:
     tuple val(sample_id), path("${sample_id}.sorted.bam"), path("${sample_id}.sorted.bam.bai"), emit: bam_bei

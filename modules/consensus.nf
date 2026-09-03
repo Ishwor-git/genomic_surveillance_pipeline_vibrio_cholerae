@@ -4,7 +4,7 @@ process GENERATE_CONSENSUS {
 
     input:
     tuple val(sample_id), path(vcf), path(csi)
-    tuple path(ref), path(ref_index_files), path(ref_dict)
+    tuple path(ref), path(ref_index_files)
 
     output:
     tuple val(sample_id), path("${sample_id}.consensus.fasta"), emit: consensus_fasta
@@ -14,4 +14,3 @@ process GENERATE_CONSENSUS {
     bcftools consensus -f ${ref} ${vcf} > ${sample_id}.consensus.fasta
     """
 }
-

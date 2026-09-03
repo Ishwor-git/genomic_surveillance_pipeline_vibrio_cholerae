@@ -4,7 +4,7 @@ process FILTER_VARIANTS {
 
     input:
     tuple val(sample_id), path(vcf), path(vcf_index)
-    tuple path(ref), path(ref_index_files), path(ref_dict)
+    tuple path(ref), path(ref_index_files)
 
     output:
     tuple val(sample_id), path("${sample_id}.filtered.vcf.gz"), path("${sample_id}.filtered.vcf.gz.csi"), emit: filtered_vcf
