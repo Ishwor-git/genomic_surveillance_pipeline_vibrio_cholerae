@@ -14,4 +14,8 @@ results/
 
 **/*.snap
 tmp/
+*.err
+*.out
+*.fastq
+
 

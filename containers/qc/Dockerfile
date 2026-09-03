@@ -15,4 +15,3 @@ ENV PATH=/opt/conda/bin:$PATH
 
 WORKDIR /work
 
-ENTRYPOINT ["fastp"]

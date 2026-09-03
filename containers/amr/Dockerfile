@@ -13,4 +13,6 @@ RUN micromamba install -y -n base \
 
 ENV PATH=/opt/conda/bin:$PATH
 
+RUN amrfinder -u
+
 WORKDIR /work
